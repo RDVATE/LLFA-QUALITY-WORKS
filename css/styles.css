@@ -135,11 +135,16 @@ a { color: inherit; text-decoration: none; }
 .feature-list .check { flex: none; width: 28px; height: 28px; border-radius: 50%; background: var(--green-500); color: #fff; display: grid; place-items: center; font-weight: 700; font-size: .85rem; margin-top: 2px; }
 .feature-list strong { display: block; color: var(--green-900); }
 .feature-list p { color: var(--muted); font-size: .96rem; }
-.why-art { position: relative; height: 380px; }
-.art-card { position: absolute; border-radius: var(--radius); display: grid; place-items: center; font-size: 3.4rem; box-shadow: var(--shadow-md); }
-.art-1 { inset: 0 30% 30% 0; background: linear-gradient(150deg, var(--green-500), var(--green-700)); }
-.art-2 { width: 46%; height: 46%; right: 0; top: 8%; background: linear-gradient(150deg, var(--lime), var(--green-500)); }
-.art-3 { width: 50%; height: 42%; right: 6%; bottom: 0; background: linear-gradient(150deg, var(--green-700), var(--green-900)); }
+.why-art { position: relative; max-width: 460px; }
+.scene { position: relative; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-lg); aspect-ratio: 4 / 3.3; }
+.scene svg { display: block; width: 100%; height: 100%; }
+.float-card { position: absolute; display: flex; align-items: center; gap: 10px; background: #fff; border-radius: 14px; box-shadow: var(--shadow-md); padding: 11px 15px; }
+.float-rating { top: 22px; left: -16px; }
+.float-rating .fc-stars { color: #f0a92b; letter-spacing: 1px; font-size: 1rem; }
+.float-rating .fc-label { font-size: .8rem; font-weight: 600; color: var(--muted); max-width: 118px; line-height: 1.25; }
+.float-badge { position: absolute; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0; bottom: -18px; right: -6px; width: 108px; height: 108px; border-radius: 50%; text-align: center; color: #fff; background: linear-gradient(145deg, var(--green-600), var(--green-800)); box-shadow: var(--shadow-lg); border: 4px solid #fff; }
+.float-badge strong { font-family: var(--font-head); font-size: 1.55rem; line-height: 1; }
+.float-badge span { font-size: .58rem; letter-spacing: .6px; text-transform: uppercase; margin-top: 3px; font-weight: 700; }
 
 /* ---------- Process ---------- */
 .steps { list-style: none; display: grid; grid-template-columns: repeat(4,1fr); gap: 22px; counter-reset: step; }
@@ -247,7 +252,7 @@ a { color: inherit; text-decoration: none; }
 @media (max-width: 900px) {
   .cards, .steps, .gallery, .reviews { grid-template-columns: repeat(2,1fr); }
   .why-grid, .quote-grid { grid-template-columns: 1fr; gap: 36px; }
-  .why-art { height: 300px; max-width: 420px; }
+  .why-art { max-width: 380px; margin-inline: auto; }
   .stats-grid { grid-template-columns: repeat(2,1fr); gap: 30px 20px; }
   .footer-inner { grid-template-columns: 1fr; text-align: center; }
   .footer-brand { justify-content: center; }

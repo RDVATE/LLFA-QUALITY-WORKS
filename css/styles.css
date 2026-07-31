@@ -169,6 +169,17 @@ a { color: inherit; text-decoration: none; }
 .review footer { color: var(--muted); font-weight: 600; font-size: .92rem; }
 .reviews-note { text-align: center; color: var(--muted); font-size: .86rem; margin-top: 24px; font-style: italic; }
 
+/* Leave a review */
+.review-form-wrap { max-width: 640px; margin: 40px auto 0; background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); padding: 30px; box-shadow: var(--shadow-md); }
+.review-form-title { font-family: var(--font-head); font-weight: 600; font-size: 1.3rem; text-align: center; color: var(--green-900); margin-bottom: 18px; }
+.star-rating { display: flex; justify-content: center; gap: 6px; margin-bottom: 20px; }
+.star-rating .star { background: none; border: 0; cursor: pointer; font-size: 2rem; line-height: 1; color: #d8dcd4; padding: 0 2px; transition: color .12s ease, transform .12s ease; }
+.star-rating .star:hover { transform: scale(1.15); }
+.star-rating .star.on { color: #f0a92b; }
+.review-form .field-row { margin-bottom: 0; }
+.review-appear { animation: reviewIn .4s ease; }
+@keyframes reviewIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+
 /* ---------- Quote ---------- */
 .quote-section { background: linear-gradient(160deg, var(--sand), #eef1e6); }
 .quote-grid { display: grid; grid-template-columns: 1fr 1.05fr; gap: 56px; align-items: start; }
@@ -190,6 +201,33 @@ a { color: inherit; text-decoration: none; }
 }
 .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--green-500); box-shadow: 0 0 0 3px rgba(59,165,92,.18); background: #fff; }
 .field textarea { resize: vertical; }
+.label-hint { font-weight: 500; color: var(--muted); font-size: .82rem; }
+
+/* Photo upload dropzone */
+.dropzone {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+  text-align: center; padding: 22px 16px; cursor: pointer;
+  border: 2px dashed var(--green-400); border-radius: var(--radius-sm);
+  background: var(--cream); color: var(--muted);
+  transition: border-color .15s ease, background .15s ease, transform .1s ease;
+}
+.dropzone:hover { border-color: var(--green-600); background: #fff; }
+.dropzone.dragover { border-color: var(--green-700); background: #eef7ef; transform: scale(1.01); }
+.dropzone-icon { font-size: 1.7rem; }
+.dropzone-text { font-size: .96rem; color: var(--ink); }
+.dropzone-text strong { color: var(--green-700); }
+.dropzone-sub { font-size: .82rem; color: var(--muted); }
+
+.previews { display: grid; grid-template-columns: repeat(auto-fill, minmax(72px, 1fr)); gap: 10px; margin-top: 12px; }
+.previews:empty { margin-top: 0; }
+.preview { position: relative; aspect-ratio: 1; border-radius: 10px; overflow: hidden; box-shadow: var(--shadow-sm); border: 1px solid var(--line); }
+.preview img { width: 100%; height: 100%; object-fit: cover; }
+.preview button {
+  position: absolute; top: 3px; right: 3px; width: 20px; height: 20px; border-radius: 50%;
+  border: 0; cursor: pointer; background: rgba(20,49,31,.78); color: #fff; font-size: 12px; line-height: 1;
+  display: grid; place-items: center; transition: background .15s ease;
+}
+.preview button:hover { background: #c0392b; }
 .form-note { margin-top: 14px; font-size: .92rem; font-weight: 600; text-align: center; min-height: 1.2em; }
 .form-note.ok { color: var(--green-700); }
 .form-note.err { color: #c0392b; }

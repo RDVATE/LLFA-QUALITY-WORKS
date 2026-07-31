@@ -184,24 +184,54 @@
         <p class="eyebrow">Reviews</p>
         <h2>What our clients say</h2>
       </div>
-      <div class="reviews">
+      <div class="reviews" id="reviewsList">
         <blockquote class="review">
           <div class="stars">★★★★★</div>
-          <p>"LLFA completely transformed our backyard. The crew was professional, on time, and the patio looks incredible. Worth every penny."</p>
+          <p>"LLFA made our lawn the best on the block. The crew was professional, on time, and the yard looks incredible. Worth every penny."</p>
           <footer>— Sample Client, Neighborhood Name</footer>
         </blockquote>
         <blockquote class="review">
           <div class="stars">★★★★★</div>
-          <p>"Reliable weekly lawn service and our yard has never looked better. Honest pricing and they always go the extra mile."</p>
+          <p>"Reliable lawn service and our yard has never looked better. Honest pricing and they always go the extra mile."</p>
           <footer>— Sample Client, Neighborhood Name</footer>
         </blockquote>
         <blockquote class="review">
           <div class="stars">★★★★★</div>
-          <p>"They designed and installed our whole front landscape. Great communication from quote to cleanup. Highly recommend."</p>
+          <p>"They cleared the moss, power washed the driveway, and planted fresh flower beds. Great communication start to finish. Highly recommend."</p>
           <footer>— Sample Client, Neighborhood Name</footer>
         </blockquote>
       </div>
-      <p class="reviews-note">↑ Placeholder reviews — replace with real testimonials from your customers.</p>
+
+      <div class="review-form-wrap">
+        <h3 class="review-form-title">Worked with us? Leave a review</h3>
+        <form class="review-form" id="reviewForm" novalidate>
+          <div class="star-rating" id="starRating" role="radiogroup" aria-label="Your rating">
+            <button type="button" class="star" data-value="1" aria-label="1 star">★</button>
+            <button type="button" class="star" data-value="2" aria-label="2 stars">★</button>
+            <button type="button" class="star" data-value="3" aria-label="3 stars">★</button>
+            <button type="button" class="star" data-value="4" aria-label="4 stars">★</button>
+            <button type="button" class="star" data-value="5" aria-label="5 stars">★</button>
+            <input type="hidden" id="ratingValue" name="rating" value="0" />
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="rvName">Your name</label>
+              <input type="text" id="rvName" name="rvName" placeholder="First name &amp; last initial" />
+            </div>
+            <div class="field">
+              <label for="rvArea">Neighborhood / city <span class="label-hint">(optional)</span></label>
+              <input type="text" id="rvArea" name="rvArea" placeholder="e.g. Portland, OR" />
+            </div>
+          </div>
+          <div class="field">
+            <label for="rvText">Your review</label>
+            <textarea id="rvText" name="rvText" rows="3" placeholder="Tell others about your experience with LLFA Quality Works."></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Post My Review</button>
+          <p class="form-note" id="reviewNote" role="status"></p>
+        </form>
+      </div>
+      <p class="reviews-note">Reviews shown are samples. New reviews post to the page for this demo — connect a backend or Google Reviews to save and display them permanently.</p>
     </div>
   </section>
 
@@ -211,7 +241,7 @@
       <div class="quote-copy">
         <p class="eyebrow light">Get started</p>
         <h2>Get your free quote</h2>
-        <p>Ready to love your yard? Tell us about your project and we'll get back to you within one business day with a free, no-obligation estimate.</p>
+        <p>Ready to love your yard? Tell us about your project — <strong>add a few photos for the fastest, most accurate quote</strong> — and we'll get back to you within one business day with a free, no-obligation estimate.</p>
         <ul class="contact-list">
           <li><span aria-hidden="true">📞</span> <a href="tel:19714449086">(971) 444-9086</a></li>
           <li><span aria-hidden="true">✉️</span> <a href="mailto:hello@example.com">hello@example.com</a> <em>&larr; add your email</em></li>
@@ -251,6 +281,16 @@
         <div class="field">
           <label for="message">Project details</label>
           <textarea id="message" name="message" rows="3" placeholder="Tell us a bit about your yard and what you'd like done."></textarea>
+        </div>
+        <div class="field">
+          <label for="photos">Add photos <span class="label-hint">— for a faster, more accurate quote</span></label>
+          <label class="dropzone" id="dropzone" for="photos">
+            <input type="file" id="photos" name="photos" accept="image/*" multiple hidden />
+            <span class="dropzone-icon" aria-hidden="true">📷</span>
+            <span class="dropzone-text"><strong>Tap to add photos</strong> or drag &amp; drop</span>
+            <span class="dropzone-sub">Snap a few shots of your yard — up to 8 images</span>
+          </label>
+          <div class="previews" id="previews" aria-live="polite"></div>
         </div>
         <button type="submit" class="btn btn-primary btn-lg btn-block">Request My Free Quote</button>
         <p class="form-note" id="formNote" role="status"></p>

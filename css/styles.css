@@ -298,3 +298,42 @@ html { scroll-snap-type: y proximity; scroll-padding-top: 0; }
   .hero, .stats, .section { min-height: auto; scroll-snap-align: none; }
   html { scroll-snap-type: none; }
 }
+
+/* ============================================================
+   Breathtaking-style chrome: fixed section counter + social,
+   and a hero scroll cue. White text uses mix-blend-mode so it
+   stays readable over both light and dark sections.
+   ============================================================ */
+.deck-chrome {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 40;
+  display: flex; align-items: flex-end; justify-content: space-between;
+  padding: 0 clamp(20px, 3vw, 40px) 24px;
+  pointer-events: none; color: #fff; mix-blend-mode: difference;
+  font-family: var(--font-head);
+}
+.deck-count { display: flex; flex-direction: column; gap: 5px; line-height: 1; }
+.deck-chapter { text-transform: uppercase; letter-spacing: .22em; font-size: .6rem; font-weight: 500; opacity: .82; }
+.deck-nums { display: flex; align-items: baseline; gap: 5px; font-weight: 700; letter-spacing: .12em; }
+#deckCurrent { font-size: 1.55rem; }
+.deck-sep { opacity: .5; font-size: 1rem; }
+#deckTotal { opacity: .7; font-size: .95rem; }
+.deck-social { list-style: none; display: flex; gap: 22px; pointer-events: auto; }
+.deck-social a { position: relative; text-transform: uppercase; letter-spacing: .16em; font-size: .68rem; font-weight: 500; }
+.deck-social a::after { content: ""; position: absolute; left: 0; bottom: -5px; width: 0; height: 1.5px; background: currentColor; transition: width .2s ease; }
+.deck-social a:hover::after { width: 100%; }
+@media (max-width: 680px) { .deck-chrome { display: none; } }
+
+.hero-cue {
+  position: absolute; left: 50%; bottom: 24px; transform: translateX(-50%); z-index: 2;
+  display: flex; flex-direction: column; align-items: center; gap: 9px;
+  color: rgba(255,255,255,.88); font-family: var(--font-head);
+  text-transform: uppercase; letter-spacing: .26em; font-size: .62rem; font-weight: 500;
+}
+.hero-cue-line {
+  width: 1.5px; height: 44px;
+  background: linear-gradient(rgba(255,255,255,.85), rgba(255,255,255,0));
+  transform-origin: top; animation: cuePulse 1.9s ease-in-out infinite;
+}
+@keyframes cuePulse { 0%, 100% { transform: scaleY(.45); opacity: .35; } 50% { transform: scaleY(1); opacity: 1; } }
+@media (max-width: 680px) { .hero-cue { display: none; } }
+@media (prefers-reduced-motion: reduce) { .hero-cue-line { animation: none; } }

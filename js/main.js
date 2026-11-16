@@ -239,4 +239,50 @@
     }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
     revealEls.forEach(function (el) { revObs.observe(el); });
   }
+
+  // ---- Deck chrome: live section counter + chapter (Breathtaking-style) ----
+  (function initDeckChrome() {
+    var sections = Array.prototype.slice.call(
+      document.querySelectorAll(".hero, .stats, .section")
+    );
+    var curEl = document.getElementById("deckCurrent");
+    var totEl = document.getElementById("deckTotal");
+    var chapEl = document.getElementById("deckChapter");
+    if (!sections.length || !curEl) return;
+
+    var labels = {
+      services: "Services", why: "Why LLFA", process: "Process",
+      work: "Our Work", reviews: "Reviews", quote: "Free Quote"
+    };
+    function pad(n) { return ("0" + n).slice(-2); }
+    function labelFor(el) {
+      if (el.classList.contains("hero")) return "Welcome";
+      if (el.classList.contains("stats")) return "By the Numbers";
+      return labels[el.id] || "";
+    }
+    function setActive(i) {
+      curEl.textContent = pad(i + 1);
+      if (chapEl) chapEl.textContent = labelFor(sections[i]);
+    }
+
+    if (totEl) totEl.textContent = pad(sections.length);
+    setActive(0);
+
+    if ("IntersectionObserver" in window) {
+      var ratios = new Array(sections.length).fill(0);
+      var lastActive = 0;
+      var deckObs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          var idx = sections.indexOf(e.target);
+          if (idx > -1) ratios[idx] = e.intersectionRatio;
+        });
+        var best = lastActive, bestR = -1;
+        for (var i = 0; i < ratios.length; i++) {
+          if (ratios[i] > bestR) { bestR = ratios[i]; best = i; }
+        }
+        if (best !== lastActive) { lastActive = best; setActive(best); }
+      }, { threshold: [0, 0.25, 0.5, 0.75, 1] });
+      sections.forEach(function (s) { deckObs.observe(s); });
+    }
+  })();
 })();

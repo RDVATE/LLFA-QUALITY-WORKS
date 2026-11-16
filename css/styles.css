@@ -70,7 +70,7 @@ h1, h2, h3 { font-family: var(--font-head); text-transform: uppercase; letter-sp
 .nav-inner { display: flex; align-items: center; gap: 24px; height: 74px; }
 .brand { display: flex; align-items: center; gap: 10px; }
 .brand-mark { display: grid; place-items: center; color: var(--green-d); }
-.brand-mark.small { color: var(--lime); }
+.brand-mark.small { color: var(--green); }
 .brand-text { display: flex; flex-direction: column; line-height: 1; }
 .brand-text strong { font-family: var(--font-head); font-weight: 700; font-size: 1.3rem; letter-spacing: .06em; color: var(--ink); text-transform: uppercase; }
 .brand-text span { font-size: .64rem; letter-spacing: .28em; text-transform: uppercase; color: var(--muted); font-family: var(--font-body); font-weight: 600; margin-top: 2px; }

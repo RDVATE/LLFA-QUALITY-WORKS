@@ -274,3 +274,9 @@ h1, h2, h3 { font-family: var(--font-head); text-transform: uppercase; letter-sp
   .hero-inner { padding: 66px 24px 78px; }
   .section { padding: 64px 0; }
 }
+
+/* ---------- Scroll reveal (rise up) ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity .6s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
+  .reveal.in { opacity: 1; transform: none; }
+}

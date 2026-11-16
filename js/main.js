@@ -220,4 +220,23 @@
     reviewNote.textContent = msg;
     reviewNote.className = "form-note " + kind;
   }
+
+  // ---- Scroll reveal: sections rise up as they enter view ----
+  var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!reduceMotion && "IntersectionObserver" in window) {
+    var revealSel = [
+      ".stats-grid", ".section-head", ".cards", ".why-grid",
+      ".steps", ".gallery", ".reviews", ".review-form-wrap", ".quote-grid"
+    ];
+    var revealEls = document.querySelectorAll(revealSel.join(","));
+    revealEls.forEach(function (el) { el.classList.add("reveal"); });
+    var revObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("in");
+        revObs.unobserve(entry.target);
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+    revealEls.forEach(function (el) { revObs.observe(el); });
+  }
 })();

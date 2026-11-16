@@ -69,7 +69,7 @@ a { color: inherit; text-decoration: none; }
 .brand-text strong { font-size: 1.15rem; letter-spacing: .5px; color: var(--green-800); }
 .brand-text span { font-size: .72rem; letter-spacing: 2.5px; text-transform: uppercase; color: var(--muted); font-family: var(--font-body); }
 .main-nav { display: flex; gap: 26px; margin-left: auto; }
-.main-nav a { font-weight: 500; color: var(--ink); font-size: .96rem; position: relative; }
+.main-nav a { font-weight: 500; color: var(--ink); font-size: .96rem; position: relative; white-space: nowrap; }
 .main-nav a::after { content: ""; position: absolute; left: 0; bottom: -6px; width: 0; height: 2px; background: var(--green-500); transition: width .2s ease; }
 .main-nav a:hover::after { width: 100%; }
 .nav-cta { margin-left: 4px; }
@@ -244,6 +244,12 @@ a { color: inherit; text-decoration: none; }
 .footer-copy { grid-column: 1 / -1; border-top: 1px solid rgba(255,255,255,.12); padding-top: 20px; font-size: .85rem; color: rgba(255,255,255,.55); }
 
 /* ---------- Responsive ---------- */
+@media (max-width: 960px) {
+  .nav-inner { gap: 16px; }
+  .main-nav { gap: 18px; }
+  .main-nav a { font-size: .9rem; }
+  .nav-cta { font-size: .9rem; padding: .62em 1.1em; }
+}
 @media (max-width: 900px) {
   .cards, .steps, .gallery, .reviews { grid-template-columns: repeat(2,1fr); }
   .why-grid, .quote-grid { grid-template-columns: 1fr; gap: 36px; }

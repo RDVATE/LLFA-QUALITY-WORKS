@@ -283,18 +283,28 @@ h1, h2, h3 { font-family: var(--font-head); text-transform: uppercase; letter-sp
 }
 
 /* ============================================================
-   Deck scroll: full-screen panels that stack and slide up over
-   each other (sticky stacking) — like dealing a deck of cards.
+   Deck scroll: panels stack and slide up over each other like a
+   deck of cards.
+
+   Short "showcase" panels (hero, stats, why, process) PIN in place
+   (position: sticky) and get covered by the next panel.
+
+   Content-heavy panels (services, work, reviews, quote) can be
+   taller than the screen, so they DON'T pin — they scroll normally
+   so every detail is readable. They still sit above the panel
+   before them (higher z-index), so they slide up and cover it,
+   keeping the deck feel at the hand-off.
    ============================================================ */
 .hero, .stats, .section {
-  position: sticky;
-  /* bottom-aligned pin: short panels (height == 100svh) pin at the top;
-     tall panels scroll through fully, then pin as the next slides over */
-  top: calc(100svh - 100%);
   min-height: 100vh;
   min-height: 100svh;
 }
-/* later panels sit above earlier ones, so each slides up and covers it */
+/* showcase panels pin, then the next panel covers them */
+.hero, .stats, #why, #process { position: sticky; top: 0; }
+/* content panels flow normally (fully scrollable) but still cover
+   the panel before them */
+#services, #work, #reviews, #quote { position: relative; }
+/* later panels paint above earlier ones, so each covers the last */
 .hero     { z-index: 1; }
 .stats    { z-index: 2; }
 #services { z-index: 3; }
@@ -304,14 +314,19 @@ h1, h2, h3 { font-family: var(--font-head); text-transform: uppercase; letter-sp
 #reviews  { z-index: 7; }
 #quote    { z-index: 8; }
 .site-footer { position: relative; z-index: 9; }
-/* short panels: center content; tall panels: top-align under the header */
+/* short panels: center content; content panels: top-align under the header */
 .stats, .section { display: flex; flex-direction: column; justify-content: center; }
 .stats-grid { width: 100%; }
-#services, #why, #work, #reviews, #quote { justify-content: flex-start; padding-top: clamp(92px, 13vh, 150px); }
+#services, #why, #work, #reviews, #quote {
+  justify-content: flex-start;
+  padding-top: clamp(90px, 12vh, 140px);
+  padding-bottom: clamp(96px, 12vh, 132px);
+}
 /* soft shadow on the leading edge of each incoming panel for depth */
 .stats, .section { box-shadow: 0 -20px 44px rgba(21,23,26,.15); }
 @media (max-width: 680px) {
-  .hero, .stats, .section { position: static; min-height: auto; box-shadow: none; }
+  .hero, .stats, #why, #process { position: static; }
+  .hero, .stats, .section { min-height: auto; box-shadow: none; }
 }
 
 /* ============================================================
@@ -322,14 +337,14 @@ h1, h2, h3 { font-family: var(--font-head); text-transform: uppercase; letter-sp
 .deck-chrome {
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 40;
   display: flex; align-items: flex-end; justify-content: space-between;
-  padding: 0 clamp(20px, 3vw, 40px) 24px;
+  padding: 0 clamp(18px, 2.6vw, 34px) 18px;
   pointer-events: none; color: #fff; mix-blend-mode: difference;
   font-family: var(--font-head);
 }
 .deck-count { display: flex; flex-direction: column; gap: 5px; line-height: 1; }
 .deck-chapter { text-transform: uppercase; letter-spacing: .22em; font-size: .6rem; font-weight: 500; opacity: .82; }
 .deck-nums { display: flex; align-items: baseline; gap: 5px; font-weight: 700; letter-spacing: .12em; }
-#deckCurrent { font-size: 1.55rem; }
+#deckCurrent { font-size: 1.3rem; }
 .deck-sep { opacity: .5; font-size: 1rem; }
 #deckTotal { opacity: .7; font-size: .95rem; }
 .deck-social { list-style: none; display: flex; gap: 22px; pointer-events: auto; }

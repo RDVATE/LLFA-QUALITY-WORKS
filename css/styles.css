@@ -190,6 +190,30 @@ h1, h2, h3 { font-family: var(--font-head); text-transform: uppercase; letter-sp
 .review-appear { animation: reviewIn .4s ease; }
 @keyframes reviewIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
 
+/* ---------- Memorial / grave care (calmer, respectful) ---------- */
+.memorial { background: linear-gradient(180deg, #eef2ec 0%, #e5eee4 100%); }
+.memorial-inner { max-width: 840px; margin-inline: auto; text-align: center; }
+.memorial .eyebrow { color: var(--green-d); }
+.memorial h2 { font-size: clamp(1.9rem, 4vw, 2.9rem); margin: 8px 0 16px; }
+.memorial .section-lead { max-width: 640px; margin: 0 auto; }
+.memorial-quote {
+  font-family: var(--font-head); text-transform: none; font-style: italic;
+  font-weight: 500; font-size: clamp(1.25rem, 2.4vw, 1.7rem); line-height: 1.32;
+  color: var(--green-ink); max-width: 620px; margin: 26px auto 34px;
+}
+.memorial-list {
+  list-style: none; display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: 22px 34px; text-align: left; max-width: 780px; margin: 0 auto 30px;
+}
+.memorial-list li { padding-left: 18px; border-left: 2px solid var(--green); display: flex; flex-direction: column; gap: 5px; }
+.memorial-list strong { font-family: var(--font-head); text-transform: uppercase; letter-spacing: .03em; font-size: 1.02rem; color: var(--ink); }
+.memorial-list span { color: var(--muted); font-size: .95rem; line-height: 1.5; }
+.memorial-trust { font-size: .8rem; color: var(--muted); text-transform: uppercase; letter-spacing: .09em; font-weight: 600; margin-bottom: 28px; }
+.memorial-actions { display: flex; gap: 20px; justify-content: center; align-items: center; flex-wrap: wrap; }
+.memorial-link { font-family: var(--font-head); text-transform: uppercase; letter-spacing: .06em; font-weight: 600; font-size: .9rem; color: var(--green-d); }
+.memorial-link:hover { text-decoration: underline; }
+@media (max-width: 680px) { .memorial-list { grid-template-columns: 1fr; gap: 18px; } }
+
 /* ---------- Quote (dark band) ---------- */
 .quote-section { background: var(--ink); color: #fff; }
 .quote-grid { display: grid; grid-template-columns: 1fr 1.05fr; gap: 56px; align-items: start; }
@@ -303,21 +327,22 @@ h1, h2, h3 { font-family: var(--font-head); text-transform: uppercase; letter-sp
 .hero, .stats, #why, #process { position: sticky; top: 0; }
 /* content panels flow normally (fully scrollable) but still cover
    the panel before them */
-#services, #work, #reviews, #quote { position: relative; }
+#services, #memorial, #work, #reviews, #quote { position: relative; }
 /* later panels paint above earlier ones, so each covers the last */
 .hero     { z-index: 1; }
 .stats    { z-index: 2; }
 #services { z-index: 3; }
-#why      { z-index: 4; }
-#process  { z-index: 5; }
-#work     { z-index: 6; }
-#reviews  { z-index: 7; }
-#quote    { z-index: 8; }
-.site-footer { position: relative; z-index: 9; }
+#memorial { z-index: 4; }
+#why      { z-index: 5; }
+#process  { z-index: 6; }
+#work     { z-index: 7; }
+#reviews  { z-index: 8; }
+#quote    { z-index: 9; }
+.site-footer { position: relative; z-index: 10; }
 /* short panels: center content; content panels: top-align under the header */
 .stats, .section { display: flex; flex-direction: column; justify-content: center; }
 .stats-grid { width: 100%; }
-#services, #why, #work, #reviews, #quote {
+#services, #memorial, #why, #work, #reviews, #quote {
   justify-content: flex-start;
   padding-top: clamp(90px, 12vh, 140px);
   padding-bottom: clamp(96px, 12vh, 132px);

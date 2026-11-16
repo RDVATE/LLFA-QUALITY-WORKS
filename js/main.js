@@ -251,7 +251,7 @@
     if (!sections.length || !curEl) return;
 
     var labels = {
-      services: "Services", why: "Why LLFA", process: "Process",
+      services: "Services", memorial: "Grave Care", why: "Why LLFA", process: "Process",
       work: "Our Work", reviews: "Reviews", quote: "Free Quote"
     };
     function pad(n) { return ("0" + n).slice(-2); }

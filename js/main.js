@@ -268,21 +268,25 @@
     if (totEl) totEl.textContent = pad(sections.length);
     setActive(0);
 
-    if ("IntersectionObserver" in window) {
-      var ratios = new Array(sections.length).fill(0);
-      var lastActive = 0;
-      var deckObs = new IntersectionObserver(function (entries) {
-        entries.forEach(function (e) {
-          var idx = sections.indexOf(e.target);
-          if (idx > -1) ratios[idx] = e.intersectionRatio;
-        });
-        var best = lastActive, bestR = -1;
-        for (var i = 0; i < ratios.length; i++) {
-          if (ratios[i] > bestR) { bestR = ratios[i]; best = i; }
-        }
-        if (best !== lastActive) { lastActive = best; setActive(best); }
-      }, { threshold: [0, 0.25, 0.5, 0.75, 1] });
-      sections.forEach(function (s) { deckObs.observe(s); });
+    // Sticky-stacked panels all stay full-size in the viewport behind the
+    // one on top, so "most visible" can't find the active one. Instead the
+    // frontmost panel is the last one (in DOM order) whose top edge has
+    // risen past the viewport midpoint.
+    var lastActive = 0, ticking = false;
+    function computeActive() {
+      ticking = false;
+      var mid = window.innerHeight * 0.5;
+      var active = 0;
+      for (var i = 0; i < sections.length; i++) {
+        if (sections[i].getBoundingClientRect().top <= mid) active = i;
+      }
+      if (active !== lastActive) { lastActive = active; setActive(active); }
     }
+    function onScroll() {
+      if (!ticking) { ticking = true; requestAnimationFrame(computeActive); }
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+    computeActive();
   })();
 })();

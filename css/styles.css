@@ -115,7 +115,7 @@ h1, h2, h3 { font-family: var(--font-head); text-transform: uppercase; letter-sp
 .stat span { color: var(--muted); font-size: .78rem; text-transform: uppercase; letter-spacing: .12em; font-weight: 600; margin-top: 8px; display: block; }
 
 /* ---------- Sections ---------- */
-.section { padding: 92px 0; }
+.section { padding: 92px 0; background: var(--paper); }
 .section-alt { background: var(--paper-2); }
 .section-head { text-align: center; max-width: 720px; margin: 0 auto 56px; }
 .section-head h2, .why-copy h2, .quote-copy h2 { font-size: clamp(1.9rem,4vw,2.9rem); margin: 8px 0 16px; }
@@ -148,6 +148,7 @@ h1, h2, h3 { font-family: var(--font-head); text-transform: uppercase; letter-sp
 .why-art { position: relative; max-width: 460px; }
 .scene { position: relative; border-radius: var(--radius-sm); overflow: hidden; box-shadow: var(--shadow-md); aspect-ratio: 4 / 3.3; }
 .scene svg { display: block; width: 100%; height: 100%; }
+.scene img { width: 100%; height: 100%; object-fit: cover; object-position: center 64%; }
 .float-card { position: absolute; display: flex; align-items: center; gap: 10px; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-sm); box-shadow: var(--shadow-md); padding: 11px 15px; }
 .float-rating { top: 22px; left: -16px; }
 .float-rating .fc-stars { color: #f0a92b; letter-spacing: 1px; font-size: 1rem; }
@@ -281,22 +282,36 @@ h1, h2, h3 { font-family: var(--font-head); text-transform: uppercase; letter-sp
   .reveal.in { opacity: 1; transform: none; }
 }
 
-/* ---------- Full-screen section scroll-snap ---------- */
-html { scroll-snap-type: y proximity; scroll-padding-top: 0; }
+/* ============================================================
+   Deck scroll: full-screen panels that stack and slide up over
+   each other (sticky stacking) — like dealing a deck of cards.
+   ============================================================ */
 .hero, .stats, .section {
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
+  position: sticky;
+  /* bottom-aligned pin: short panels (height == 100svh) pin at the top;
+     tall panels scroll through fully, then pin as the next slides over */
+  top: calc(100svh - 100%);
   min-height: 100vh;
   min-height: 100svh;
 }
-/* short sections: center their content vertically */
+/* later panels sit above earlier ones, so each slides up and covers it */
+.hero     { z-index: 1; }
+.stats    { z-index: 2; }
+#services { z-index: 3; }
+#why      { z-index: 4; }
+#process  { z-index: 5; }
+#work     { z-index: 6; }
+#reviews  { z-index: 7; }
+#quote    { z-index: 8; }
+.site-footer { position: relative; z-index: 9; }
+/* short panels: center content; tall panels: top-align under the header */
 .stats, .section { display: flex; flex-direction: column; justify-content: center; }
 .stats-grid { width: 100%; }
-/* taller sections: top-align so headings never hide under the sticky header */
-#services, #work, #reviews, #quote { justify-content: flex-start; padding-top: clamp(84px, 12vh, 150px); }
+#services, #why, #work, #reviews, #quote { justify-content: flex-start; padding-top: clamp(92px, 13vh, 150px); }
+/* soft shadow on the leading edge of each incoming panel for depth */
+.stats, .section { box-shadow: 0 -20px 44px rgba(21,23,26,.15); }
 @media (max-width: 680px) {
-  .hero, .stats, .section { min-height: auto; scroll-snap-align: none; }
-  html { scroll-snap-type: none; }
+  .hero, .stats, .section { position: static; min-height: auto; box-shadow: none; }
 }
 
 /* ============================================================
